@@ -34,6 +34,4 @@ public class Account
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Parcel> Parcels = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Receiver Receiver;
 }

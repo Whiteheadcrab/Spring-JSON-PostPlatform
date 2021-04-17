@@ -28,4 +28,7 @@ public class Parcel
 
    @Enumerated(value = EnumType.STRING)
    private Type type;
+
+   @OneToOne(cascade = CascadeType.ALL)
+   private Receiver Receiver;
 }

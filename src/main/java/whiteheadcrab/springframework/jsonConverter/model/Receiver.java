@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@EqualsAndHashCode(exclude = {"account"})
+@EqualsAndHashCode(exclude = {"parcel"})
 public class Receiver
 {
     @Id
