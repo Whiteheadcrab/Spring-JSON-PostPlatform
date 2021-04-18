@@ -10,4 +10,6 @@ public interface ParcelService
     Set<Parcel> getParcels();
 
     Set<Parcel> findParcelsbyAccount(Account account);
+
+    Parcel findbyId(Long l);
 }

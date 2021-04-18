@@ -8,6 +8,7 @@ import whiteheadcrab.springframework.jsonConverter.repositories.ParcelRepositori
 
 import java.util.HashSet;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -38,4 +39,10 @@ public class ParcelServiceImpl implements ParcelService
 
         return null;
     }
+
+    @Override
+    public Parcel findbyId(Long l) {
+        return null;
+    }
+
 }
