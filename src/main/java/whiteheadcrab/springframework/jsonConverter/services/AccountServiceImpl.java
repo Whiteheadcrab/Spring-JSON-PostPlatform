@@ -1,6 +1,6 @@
 package whiteheadcrab.springframework.jsonConverter.services;
 
-public class AccountServiceImpl
+public class AccountServiceImpl implements AccountService
 {
 
 }

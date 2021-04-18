@@ -21,7 +21,7 @@ public class Parcel
    private LocalDate printDate;
    private LocalDate deliveryDate;
 
-   @OneToMany(cascade = CascadeType.ALL , mappedBy = "parcel")
+   @OneToMany(cascade = CascadeType.ALL )
    private Set<Station> Stations = new HashSet<>();
 
    private String deliveryAim;
