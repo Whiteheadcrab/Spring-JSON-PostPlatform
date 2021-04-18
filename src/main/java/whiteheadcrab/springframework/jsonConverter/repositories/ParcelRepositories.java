@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface ParcelRepositories extends CrudRepository<Parcel,Long>
 {
-
+    Optional<Parcel> findByAccount_Nip(String nip);
 }

@@ -3,10 +3,7 @@ package whiteheadcrab.springframework.jsonConverter.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -18,4 +15,21 @@ public class Station
     private Long id;
 
     private String name;
+
+    @ManyToOne
+    private Parcel parcel;
+
+    public Station()
+    {}
+
+    public Station(String name)
+    {
+        this.name = name;
+    }
+
+    public Station(String name , Parcel parcel)
+    {
+        this.name = name;
+        this.parcel = parcel;
+    }
 }

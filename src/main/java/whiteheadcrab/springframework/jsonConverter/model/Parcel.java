@@ -34,4 +34,11 @@ public class Parcel
 
    @ManyToOne
    private Account account;
+
+   public Parcel addStation(Station station)
+   {
+      station.setParcel(this);
+      this.Stations.add(station);
+      return this;
+   }
 }
