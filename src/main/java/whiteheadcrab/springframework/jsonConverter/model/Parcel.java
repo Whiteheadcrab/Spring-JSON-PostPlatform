@@ -31,4 +31,7 @@ public class Parcel
 
    @OneToOne(cascade = CascadeType.ALL)
    private Receiver Receiver;
+
+   @ManyToOne
+   private Account account;
 }
