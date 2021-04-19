@@ -41,8 +41,11 @@ public class ParcelServiceImpl implements ParcelService
     }
 
     @Override
-    public Parcel findbyId(Long l) {
-        return null;
+    public Parcel findbyId(Long l)
+    {
+        Optional<Parcel> parcelOptional = parcelRepositories.findById(l);
+
+        return parcelOptional.get();
     }
 
 }

@@ -27,7 +27,7 @@
                                 <h5>Data wydruku:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>00-00-0000</p>
+                                <p th:text="${parcel.printDate}">00-00-0000</p>
                             </div>
                         </div>
                         <div class="row">
@@ -35,7 +35,7 @@
                                 <h5>Data nadania:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>00-00-0000</p>
+                                <p th:text="${parcel.deliveryDate}">00-00-0000</p>
                             </div>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ public class Parcel
    private LocalDate deliveryDate;
 
    @OneToMany(cascade = CascadeType.ALL )
-   private Set<Station> Stations = new HashSet<>();
+   private Set<Station> stations = new HashSet<>();
 
    private String deliveryAim;
 
@@ -38,7 +38,7 @@ public class Parcel
    public Parcel addStation(Station station)
    {
       station.setParcel(this);
-      this.Stations.add(station);
+      this.stations.add(station);
       return this;
    }
 }

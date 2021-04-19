@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class AccountBootstrap implements ApplicationListener<ContextRefreshedEvent>
 {
-    public AccountBootstrap(AccountRepositories accountRepositories, ParcelRepositories parcelRepositories) {
+    public AccountBootstrap(AccountRepositories accountRepositories) {
         this.accountRepositories = accountRepositories;
     }
 
