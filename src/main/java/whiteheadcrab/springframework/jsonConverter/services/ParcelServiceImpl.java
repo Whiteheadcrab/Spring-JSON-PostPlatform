@@ -1,5 +1,6 @@
 package whiteheadcrab.springframework.jsonConverter.services;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -14,10 +15,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 
+import java.util.Base64;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Base64.Encoder;
+
+
+
+
 
 @Slf4j
 @Service
@@ -134,9 +141,21 @@ public class ParcelServiceImpl implements ParcelService
         ty = -15;
         parcelInfo="Telephon kontaktowy: "+parcel.getReceiver().getTelephoneNumber();
         textAdd(ty,tx,parcelInfo,contentStream);
-        parcelInfo="Email:: "+parcel.getReceiver().getEmail();
+        parcelInfo="Email: "+parcel.getReceiver().getEmail();
         textAdd(ty,tx,parcelInfo,contentStream);
 
+        Encoder encoder = Base64.getEncoder();
+        String collect  = collectJson(parcel);
+        String encodedString = encoder.encodeToString(collect.getBytes());
+
+        //Header of decoded Parcel
+        ty = -45;
+        parcelInfo="KOD2D";
+        //Body of decoded Parcel
+        textAdd(ty,tx,parcelInfo,contentStream);
+        ty = -15;
+        parcelInfo = encodedString;
+        textAdd(ty,tx,parcelInfo,contentStream);
 
         contentStream.endText();
         contentStream.close();
@@ -156,5 +175,20 @@ public class ParcelServiceImpl implements ParcelService
     {
         pdPageContentStream.newLineAtOffset(tx, ty);
         pdPageContentStream.showText(text);
+    }
+
+
+    public String collectJson(Parcel parcel)
+    {
+        String gatheredString = parcel.getId().toString()+"KOD2D"+parcel.getPrintDate().toString()+"KOD2D"+
+                parcel.getDeliveryDate().toString()+"KOD2D"+ parcel.getDeliveryAim()+"KOD2D"+
+                parcel.getStation().getName()+"KOD2D"+parcel.getType().toString()+"KOD2D"+
+                parcel.getAccount().getNip().toString()+"KOD2D"+parcel.getAccount().getFirmName()+"KOD2D"+
+                parcel.getAccount().getFirstName()+"KOD2D"+parcel.getAccount().getLastName()+"KOD2D"+
+                parcel.getAccount().getStreetName()+"KOD2D"+parcel.getAccount().getHouseNumber().toString()+"KOD2D"+
+                parcel.getAccount().getFlatNumber().toString()+"KOD2D"+parcel.getAccount().getPostCode()+"KOD2D"+
+                parcel.getAccount().getTown()+"KOD2D"+parcel.getAccount().getTelephoneNumber()+"KOD2D"+
+                parcel.getReceiver().getTelephoneNumber()+"KOD2D"+parcel.getReceiver().getEmail()+"KOD2D";
+        return  gatheredString;
     }
 }
