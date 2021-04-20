@@ -9,7 +9,8 @@ import whiteheadcrab.springframework.jsonConverter.model.Type;
 import whiteheadcrab.springframework.jsonConverter.services.AccountService;
 import whiteheadcrab.springframework.jsonConverter.services.ParcelService;
 
-import javax.naming.Name;
+import java.io.IOException;
+
 
 @Slf4j
 @Controller
@@ -34,5 +35,15 @@ public class LoginController
         return "parcel/show";
     }
 
+    @RequestMapping("/parcel/{id}/save")
+    public String saveProcess(Model model, @PathVariable String id) throws IOException {
+        //For now here will be direct link to the page on which will be parcel added in bootstrap
+        //In future here will be account page which will shows all parcels for this account and only selecting this specific parcel it will open parcel page
+        //Must be account/show
+        model.addAttribute("parcel",parcelService.findbyId(new Long(id)));
+        Type.values();
+        parcelService.savePDF(parcelService.findbyId(new Long(id)));
+        return "parcel/save";
+    }
 
 }

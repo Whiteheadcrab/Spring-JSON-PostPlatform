@@ -1,11 +1,19 @@
 package whiteheadcrab.springframework.jsonConverter.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Service;
 import whiteheadcrab.springframework.jsonConverter.model.Account;
 import whiteheadcrab.springframework.jsonConverter.model.Parcel;
 import whiteheadcrab.springframework.jsonConverter.repositories.ParcelRepositories;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 import java.util.Optional;
@@ -48,4 +56,105 @@ public class ParcelServiceImpl implements ParcelService
         return parcelOptional.get();
     }
 
+    @Override
+    public void savePDF(Parcel parcel) throws IOException
+    {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+        contentStream.beginText();
+
+        //First line
+        Integer ty = 700;
+        Integer tx = 25;
+
+        //Inputting first line
+        String parcelInfo = "Etykieta Listu przewozowego dla Parcel Id "+parcel.getId();
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Inputting Parcel
+        //Header of Parcel
+        tx = 0;
+        ty = -30;
+        parcelInfo="Parcel";
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Body of Parcel
+        ty = -15;
+        parcelInfo="Data wydruku: "+parcel.getPrintDate();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Data nadania: "+parcel.getDeliveryDate();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Stacja nadania: "+parcel.getDeliveryAim();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Stacja docelowa: "+parcel.getStation().getName();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Rodzaj przesylki: "+parcel.getType();
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Inputting value from account
+        //Header
+        ty = -45;
+        parcelInfo="Account";
+        textAdd(ty,tx,parcelInfo,contentStream);
+        //Body of Account
+        ty = -15;
+        parcelInfo="NIP: "+parcel.getAccount().getNip();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Nazwa Firmy: "+parcel.getAccount().getFirmName();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Imie: "+parcel.getAccount().getFirstName();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Nazwisko: "+parcel.getAccount().getLastName();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Ulica: "+parcel.getAccount().getStreetName();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Numer Domu: "+parcel.getAccount().getHouseNumber();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Numer Mieszkania: "+parcel.getAccount().getFlatNumber();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Kod pocztowy: "+parcel.getAccount().getPostCode();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Miasto: "+parcel.getAccount().getTown();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Telephon kontaktowy: "+parcel.getAccount().getTelephoneNumber();
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Inputting Receiver
+        //Header
+        ty = -45;
+        parcelInfo="Odbiorca";
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Body of Receiver
+        ty = -15;
+        parcelInfo="Telephon kontaktowy: "+parcel.getReceiver().getTelephoneNumber();
+        textAdd(ty,tx,parcelInfo,contentStream);
+        parcelInfo="Email:: "+parcel.getReceiver().getEmail();
+        textAdd(ty,tx,parcelInfo,contentStream);
+
+
+        contentStream.endText();
+        contentStream.close();
+
+        //Path for saved document
+        String path;
+        //Receive current time and date for file name
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now();
+        path = "C:/Users/Mykyta/Desktop/"+ formatter.format(date)+"-"+LocalDateTime.now().getHour()+"-"+LocalDateTime.now().getMinute()+ "-Parcel-"+parcel.getId()+".pdf";
+
+        document.save(path);
+        document.close();
+    }
+
+    private void textAdd(Integer ty , Integer tx, String text , PDPageContentStream pdPageContentStream) throws IOException
+    {
+        pdPageContentStream.newLineAtOffset(tx, ty);
+        pdPageContentStream.showText(text);
+    }
 }

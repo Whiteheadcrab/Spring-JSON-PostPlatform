@@ -3,6 +3,7 @@ package whiteheadcrab.springframework.jsonConverter.services;
 import whiteheadcrab.springframework.jsonConverter.model.Account;
 import whiteheadcrab.springframework.jsonConverter.model.Parcel;
 
+import java.io.IOException;
 import java.util.Set;
 
 public interface ParcelService
@@ -12,4 +13,6 @@ public interface ParcelService
     Set<Parcel> findParcelsbyAccount(Account account);
 
     Parcel findbyId(Long l);
+
+     void savePDF(Parcel parcel) throws IOException;
 }
