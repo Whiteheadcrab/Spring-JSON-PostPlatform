@@ -144,6 +144,7 @@ public class ParcelServiceImpl implements ParcelService
         parcelInfo="Email: "+parcel.getReceiver().getEmail();
         textAdd(ty,tx,parcelInfo,contentStream);
 
+        //Encoding into Base64
         Encoder encoder = Base64.getEncoder();
         String collect  = collectJson(parcel);
         String encodedString = encoder.encodeToString(collect.getBytes());
@@ -151,11 +152,26 @@ public class ParcelServiceImpl implements ParcelService
         //Header of decoded Parcel
         ty = -45;
         parcelInfo="KOD2D";
-        //Body of decoded Parcel
         textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Body of encoded Parcel
         ty = -15;
-        parcelInfo = encodedString;
-        textAdd(ty,tx,parcelInfo,contentStream);
+
+        //Checking Length of encoded Parcel
+        if (encodedString.length()>60) {
+            String part;
+
+                do
+                    {
+                    part = encodedString.substring(0,60);
+                    textAdd(ty,tx,part,contentStream);
+                    encodedString = encodedString.substring(60);
+                    }
+                while (encodedString.length() > 60);
+        }
+        else {
+            textAdd(ty,tx,encodedString,contentStream);
+        }
 
         contentStream.endText();
         contentStream.close();
