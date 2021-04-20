@@ -21,8 +21,8 @@ public class Parcel
    private LocalDate printDate;
    private LocalDate deliveryDate;
 
-   @OneToMany(cascade = CascadeType.ALL )
-   private Set<Station> stations = new HashSet<>();
+   @OneToOne(cascade = CascadeType.ALL)
+   private Station station;
 
    private String deliveryAim;
 
@@ -30,15 +30,9 @@ public class Parcel
    private Type type;
 
    @OneToOne(cascade = CascadeType.ALL)
-   private Receiver Receiver;
+   private Receiver receiver;
 
    @ManyToOne
    private Account account;
 
-   public Parcel addStation(Station station)
-   {
-      station.setParcel(this);
-      this.stations.add(station);
-      return this;
-   }
 }

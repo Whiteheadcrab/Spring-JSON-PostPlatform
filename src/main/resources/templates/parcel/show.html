@@ -49,6 +49,41 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-3">
+                                    <h5>Stacja nadania:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${parcel.deliveryAim}">00-00-0000</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Stacja docelowa:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                <ul>
+                                    <p th:text="${parcel.station.name}">00-00-0000</p>
+                                </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Rodzaj przesylki:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${parcel.type}">00-00-0000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="container-fluid" style="margin-top: 20px">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <h5>NIP:</h5>
                                 </div>
                                 <div class="col-md-3">
@@ -60,7 +95,7 @@
                                     <h5>Nazwa Firmy:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>Firma</p>
+                                    <p  th:text="${parcel.account.firmName}">Firma</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -68,7 +103,7 @@
                                     <h5>Imie:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>Nick</p>
+                                    <p th:text="${parcel.account.firstName}">Nick</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -76,7 +111,7 @@
                                     <h5>Nazwisko:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>Smith</p>
+                                    <p th:text="${parcel.account.lastName}">Smith</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +119,7 @@
                                     <h5>Numer Domu:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p> </p>
+                                    <p th:text="${parcel.account.houseNumber}">0</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,7 +127,7 @@
                                     <h5>Numer Mieszkania:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p> </p>
+                                    <p th:text="${parcel.account.flatNumber}">0</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -100,7 +135,7 @@
                                     <h5>Kod pocztowy:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p> </p>
+                                    <p th:text="${parcel.account.postCode}">00-000</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -108,7 +143,7 @@
                                     <h5>Miasto:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p> </p>
+                                    <p th:text="${parcel.account.town}">Town</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -116,7 +151,7 @@
                                     <h5>Telephon kontaktowy:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p> </p>
+                                    <p th:text="${parcel.account.telephoneNumber}">000000000</p>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +176,7 @@
                                         <h5>Telefon kontaktowy:</h5>
                                     </div>
                                     <div class="col-md-3">
-                                        <p> </p>
+                                        <p th:text="${parcel.receiver.telephoneNumber}">000000000</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -149,7 +184,7 @@
                                         <h5>email:</h5>
                                     </div>
                                     <div class="col-md-3">
-                                        <p> </p>
+                                        <p th:text="${parcel.receiver.email}">0</p>
                                     </div>
                                 </div>
                             </div>
@@ -158,6 +193,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>

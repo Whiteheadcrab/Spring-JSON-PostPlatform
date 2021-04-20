@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import whiteheadcrab.springframework.jsonConverter.model.*;
 import whiteheadcrab.springframework.jsonConverter.repositories.AccountRepositories;
-import whiteheadcrab.springframework.jsonConverter.repositories.ParcelRepositories;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class AccountBootstrap implements ApplicationListener<ContextRefreshedEve
         //Adding account
         Account account1 = new Account();
         account1.setFirmName("Norels Patrolum");
-        account1.setFirstname("Jack");
-        account1.setLastname("Sermius");
+        account1.setFirstName("Jack");
+        account1.setLastName("Sermius");
         account1.setStreetName("Alej Serkisus");
         account1.setHouseNumber((long) 3);
         account1.setFlatNumber((long) 13);
@@ -47,8 +46,7 @@ public class AccountBootstrap implements ApplicationListener<ContextRefreshedEve
         //Creating Parcel
         Parcel parcel1 = new Parcel();
         parcel1.setDeliveryAim("Veni");
-        parcel1.addStation(new Station("Stulak"));
-        parcel1.addStation(new Station("Veni"));
+        parcel1.setStation(new Station("Stulak "));
         parcel1.setType(Type.LIGHT);
         parcel1.setPrintDate(LocalDate.ofEpochDay(18-04-2021));
         parcel1.setDeliveryDate(LocalDate.ofEpochDay(19-04-2021));

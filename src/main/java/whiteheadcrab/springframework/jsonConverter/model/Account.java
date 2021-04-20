@@ -18,8 +18,8 @@ public class Account
 
     //Data of account
     private String firmName;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String streetName;
     private Long houseNumber;
     private Long flatNumber;
