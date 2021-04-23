@@ -9,3 +9,4 @@ Main responsibility of this application :
 Additional information :
 * to start this application please change in the file ParcelServiceImpl.java in the line 184 path from
 "C:/Users/Mykyta/Desktop/" into more suitable for you path where PDF folder will be generated
+* this application will use port 8080 , so please double check that this port is free and available
