@@ -64,7 +64,7 @@ public class ParcelServiceImpl implements ParcelService
     }
 
     @Override
-    public void savePDF(Parcel parcel) throws IOException
+    public String savePDF(Parcel parcel) throws IOException
     {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
@@ -185,6 +185,8 @@ public class ParcelServiceImpl implements ParcelService
 
         document.save(path);
         document.close();
+
+        return path;
     }
 
     private void textAdd(Integer ty , Integer tx, String text , PDPageContentStream pdPageContentStream) throws IOException

@@ -42,7 +42,7 @@ public class LoginController
         //Must be account/show
         model.addAttribute("parcel",parcelService.findbyId(new Long(id)));
         Type.values();
-        parcelService.savePDF(parcelService.findbyId(new Long(id)));
+        model.addAttribute("path",parcelService.savePDF(parcelService.findbyId(new Long(id))));
         return "parcel/save";
     }
 

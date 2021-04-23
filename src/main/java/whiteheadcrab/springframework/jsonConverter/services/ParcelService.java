@@ -14,5 +14,5 @@ public interface ParcelService
 
     Parcel findbyId(Long l);
 
-     void savePDF(Parcel parcel) throws IOException;
+    String savePDF(Parcel parcel) throws IOException;
 }
